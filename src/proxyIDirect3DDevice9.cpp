@@ -2026,7 +2026,7 @@ void renderScoreList ()
 	int			rendered_players = 0;
 	static int	current_player = 0;
 	static int	current_player_id = 0;
-	float		loc[2] = { (float) ( pPresentParam.BackBufferWidth / 4 ), 100.0f };
+	float		loc[2] = { ( pPresentParam.BackBufferWidth / 4 ), 100.0f };
 
 	if ( amount_players < max_amount_players )
 	{
@@ -3731,22 +3731,22 @@ void renderHandler()
 
 				if ( set.hud_indicator_inv )
 				{
-					HUD_TEXT_TGL( x, cheat_state->_generic.hp_cheat ? color_enabled : color_disabled, "Inv" );
+					HUD_TEXT_TGL( x, cheat_state->_generic.hp_cheat ? color_enabled : color_disabled, "Неуязвимость" );
 				}
 
 				if ( set.hud_indicator_weapon )
 				{
-					HUD_TEXT_TGL( x, cheat_state->_generic.weapon ? color_enabled : color_disabled, "Weapon" );
+					HUD_TEXT_TGL( x, cheat_state->_generic.weapon ? color_enabled : color_disabled, "Оружие" );
 				}
 
 				if ( set.hud_indicator_money )
 				{
-					HUD_TEXT_TGL( x, cheat_state->_generic.money ? color_enabled : color_disabled, "Money" );
+					HUD_TEXT_TGL( x, cheat_state->_generic.money ? color_enabled : color_disabled, "Деньги" );
 				}
 
 				if ( set.hud_indicator_freeze )
 				{
-					HUD_TEXT_TGL( x, cheat_state->_generic.vehicles_freeze ? color_enabled : color_disabled, "Freeze" );
+					HUD_TEXT_TGL( x, cheat_state->_generic.vehicles_freeze ? color_enabled : color_disabled, "Фриз" );
 				}
 
 				if ( set.hud_fps_draw )
@@ -3778,32 +3778,32 @@ void renderHandler()
 			{
 				if ( set.hud_indicator_inveh_airbrk )
 				{
-					HUD_TEXT_TGL( x, cheat_state->vehicle.air_brake ? color_enabled : color_disabled, "AirBrk" );
+					HUD_TEXT_TGL( x, cheat_state->vehicle.air_brake ? color_enabled : color_disabled, "АирБрейк" );
 				}
 
 				if ( set.hud_indicator_inveh_stick )
 				{
-					HUD_TEXT_TGL( x, cheat_state->vehicle.stick ? color_enabled : color_disabled, "Stick" );
+					HUD_TEXT_TGL( x, cheat_state->vehicle.stick ? color_enabled : color_disabled, "Стик" );
 				}
 
 				if ( set.hud_indicator_inveh_brkdance )
 				{
-					HUD_TEXT_TGL( x, cheat_state->vehicle.brkdance ? color_enabled : color_disabled, "BrkDance" );
+					HUD_TEXT_TGL( x, cheat_state->vehicle.brkdance ? color_enabled : color_disabled, "БрейкДанц" );
 				}
 
 				if ( set.hud_indicator_inveh_spider )
 				{
-					HUD_TEXT_TGL( x, cheat_state->vehicle.spiderWheels_on ? color_enabled : color_disabled, "Spider" );
+					HUD_TEXT_TGL( x, cheat_state->vehicle.spiderWheels_on ? color_enabled : color_disabled, "Паук" );
 				}
 
 				if ( set.hud_indicator_inveh_fly )
 				{
-					HUD_TEXT_TGL( x, cheat_state->vehicle.fly ? color_enabled : color_disabled, "Fly" );
+					HUD_TEXT_TGL( x, cheat_state->vehicle.fly ? color_enabled : color_disabled, "Полёт" );
 				}
 
 				if ( set.hud_indicator_freezerot )
 				{
-					HUD_TEXT_TGL( x, cheat_state->vehicle.freezerot ? color_enabled : color_disabled, "FreezeRot" );
+					HUD_TEXT_TGL( x, cheat_state->vehicle.freezerot ? color_enabled : color_disabled, "ФризРот" );
 				}
 
 				RenderVehicleHPBar();
@@ -3812,27 +3812,27 @@ void renderHandler()
 			{
 				if ( set.hud_indicator_onfoot_airbrk )
 				{
-					HUD_TEXT_TGL( x, cheat_state->actor.air_brake ? color_enabled : color_disabled, "AirBrk" );
+					HUD_TEXT_TGL( x, cheat_state->actor.air_brake ? color_enabled : color_disabled, "АирБрейк" );
 				}
 
 				if ( set.hud_indicator_onfoot_stick )
 				{
-					HUD_TEXT_TGL( x, cheat_state->actor.stick ? color_enabled : color_disabled, "Stick" );
+					HUD_TEXT_TGL( x, cheat_state->actor.stick ? color_enabled : color_disabled, "Стик" );
 				}
 
 				if ( set.hud_indicator_onfoot_aim )
 				{
-					HUD_TEXT_TGL( x, cheat_state->actor.autoaim ? color_enabled : color_disabled, "Aim" );
+					HUD_TEXT_TGL( x, cheat_state->actor.autoaim ? color_enabled : color_disabled, "Аим" );
 				}
 
 				if ( set.hud_indicator_onfoot_fly )
 				{
-					HUD_TEXT_TGL( x, cheat_state->actor.fly_on ? color_enabled : color_disabled, "Fly" );
+					HUD_TEXT_TGL( x, cheat_state->actor.fly_on ? color_enabled : color_disabled, "Полёт" );
 				}
 
 				if (set.hud_indicator_surf)
 				{
-					HUD_TEXT_TGL( x, cheat_state->actor.surf ? color_enabled : color_disabled, "Surf" );
+					HUD_TEXT_TGL( x, cheat_state->actor.surf ? color_enabled : color_disabled, "Сёрф" );
 				}
 
 				RenderPedHPBar();
