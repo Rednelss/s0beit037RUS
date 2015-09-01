@@ -27,8 +27,8 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 
 #define M0D_FOLDER		"mod_sa\\"
-#define M0D_NAME		"mod_sa"
-#define M0D_VERSION		"4.4.0.3 by FYP // blast.hk"
+#define M0D_NAME		"S0beit"
+#define M0D_VERSION		"1.00RUS by Rednelss for Cheat-Master.Ru"
 #define SAMP_VERSION	"SA:MP 0.3.7"
 #define M0D_DEV_ADVANCEDINFO
 
@@ -37,7 +37,7 @@
 //#define __CHEAT_VEHRECORDING_H__
 
 #define BP _asm int 3
-#define NAME M0D_NAME " " M0D_VERSION
+#define NAME ""M0D_NAME """ "M0D_VERSION ""
 
 #define COMPILE_DT ""__DATE__" "__TIME__""
 #define COMPILE_VERSION _MSC_VER
