@@ -1684,17 +1684,17 @@ static int menu_callback_cheats_invuln ( int op, struct menu_item *item )
 			else
 				set.hp_minimum = roundf( set.hp_minimum );
 
-			menu_item_name_set( item, "Vehicle minimum HP: %d", (int)set.hp_minimum );
+			menu_item_name_set( item, "Минимум ХП техники: %d", (int)set.hp_minimum );
 			break;
 
 		case ID_CHEAT_INVULN_REGEN:
 			set.hp_regen += (float)mod;
-			menu_item_name_set( item, "Vehicle HP regeneration: %dhp/sec", (int)set.hp_regen );
+			menu_item_name_set( item, "Реген ХП техники: %dhp/sec", (int)set.hp_regen );
 			break;
 
 		case ID_CHEAT_INVULN_REGEN_ONFOOT:
-			set.hp_regen_onfoot += (float)mod;
-			menu_item_name_set( item, "Onfoot HP regeneration: %dhp/sec", (int)set.hp_regen_onfoot );
+			set.hp_regen_onfoot += (float)mod * 0.1;
+			menu_item_name_set( item, "Реген ХП ГГ: %.1fhp/sec (АРП)", (float)set.hp_regen_onfoot );
 			break;
 		}
 		break;
@@ -3216,97 +3216,97 @@ void menu_maybe_init ( void )
 
 	/** Menu Items **/
 	/* main menu */
-	menu_item_add( menu_main, NULL, "\tGTA", ID_NONE, MENU_COLOR_SEPARATOR, NULL );
-	menu_item_add( menu_main, menu_cheats, "Cheats", ID_NONE, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_main, menu_weapons, "Weapons", ID_NONE, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_main, menu_vehicles, "Vehicles", ID_NONE, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_main, menu_teleports, "Teleports", ID_NONE, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_main, menu_misc, "Misc.", ID_NONE, MENU_COLOR_DEFAULT, NULL );
-	snprintf( name, sizeof(name), "GTA Patches (%d/%d)", iGTAPatchesCount, INI_PATCHES_MAX );
+	menu_item_add( menu_main, NULL, "\tГТА", ID_NONE, MENU_COLOR_SEPARATOR, NULL );
+	menu_item_add( menu_main, menu_cheats, "Читы", ID_NONE, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_main, menu_weapons, "Оружие", ID_NONE, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_main, menu_vehicles, "Техника", ID_NONE, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_main, menu_teleports, "Телепорты", ID_NONE, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_main, menu_misc, "Другое", ID_NONE, MENU_COLOR_DEFAULT, NULL );
+	snprintf( name, sizeof(name), "ГТА Патчи (%d/%d)", iGTAPatchesCount, INI_PATCHES_MAX );
 	menu_item_add( menu_main, menu_patches, name, ID_NONE, MENU_COLOR_DEFAULT, NULL );
 
 	/* main menu (samp specific) */
 	if ( g_dwSAMP_Addr != NULL )
 	{
-		menu_item_add( menu_main, NULL, "\tSA-MP", ID_NONE, MENU_COLOR_SEPARATOR, NULL );
-		menu_item_add( menu_main, menu_players, "Players", ID_NONE, MENU_COLOR_DEFAULT, NULL );
-		snprintf( name, sizeof(name), "Fav. server list (%d/%d)", iServersCount, INI_SERVERS_MAX );
+		menu_item_add( menu_main, NULL, "\САМП", ID_NONE, MENU_COLOR_SEPARATOR, NULL );
+		menu_item_add( menu_main, menu_players, "Игроки", ID_NONE, MENU_COLOR_DEFAULT, NULL );
+		snprintf( name, sizeof(name), "Избранные сервера (%d/%d)", iServersCount, INI_SERVERS_MAX );
 		menu_item_add( menu_main, menu_servers, name, ID_NONE, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_main, menu_sampmisc, "SA:MP Misc.", ID_NONE, MENU_COLOR_DEFAULT, NULL );
-		snprintf( name, sizeof(name), "SA:MP Patches (%d/%d)", iSAMPPatchesCount, INI_SAMPPATCHES_MAX );
+		menu_item_add( menu_main, menu_sampmisc, "Другое", ID_NONE, MENU_COLOR_DEFAULT, NULL );
+		snprintf( name, sizeof(name), "САМП Патчи (%d/%d)", iSAMPPatchesCount, INI_SAMPPATCHES_MAX );
 		menu_item_add( menu_main, menu_samppatches, name, ID_NONE, MENU_COLOR_DEFAULT, NULL );
 	}
 
 	/* main menu -> cheats - menu items */
-	menu_item_add( menu_cheats, menu_cheats_mods, "Vehicle upgrades", ID_CHEAT_MODS, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, menu_cheats_mods, "Тюнинг авто", ID_CHEAT_MODS, MENU_COLOR_DEFAULT, NULL );
 
 	//menu_item_add( menu_cheats, menu_cheats_handling, "Change vehicle handling", ID_CHEAT_HANDLING, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, menu_cheats_money, "Money", ID_CHEAT_MONEY, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, menu_cheats_inv, "Invulnerable", ID_CHEAT_INVULN, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Restore health", ID_CHEAT_HP, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Restore armor", ID_CHEAT_ARMOR, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, menu_cheats_weather, "Freeze weather", ID_NONE, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, menu_cheats_time, "Freeze time", ID_NONE, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Gravity: 0.0080", ID_CHEAT_GRAVITY, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Game speed: 100%", ID_CHEAT_GAME_SPEED, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Map", ID_CHEAT_MAP, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Render teleport texts", ID_CHEAT_TELETEXTS, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Misc. protections", ID_CHEAT_PROT, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Go to nearest empty car", ID_CHEAT_WARP_NEAR, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Give Jetpack", ID_CHEAT_JETPACK, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Unlock vehicles", ID_CHEAT_UNLOCK, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Keep trailers attached", ID_CHEAT_KEEP_TRAILER, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Toggle vehicle collisions", ID_CHEAT_NOCOLS, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Chams", ID_CHEAT_CHAMS, MENU_COLOR_DEFAULT, NULL );
-	snprintf( name, sizeof(name), "Custom running style: %i, ", set.custom_runanimation_id );
+	menu_item_add( menu_cheats, menu_cheats_money, "Деньги", ID_CHEAT_MONEY, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, menu_cheats_inv, "Неуязвимость", ID_CHEAT_INVULN, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "Восстановить ХП", ID_CHEAT_HP, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "Восстановить броню", ID_CHEAT_ARMOR, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, menu_cheats_weather, "Фриз погоды", ID_NONE, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, menu_cheats_time, "Фриз времени", ID_NONE, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "Гравити: 0.0080", ID_CHEAT_GRAVITY, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "Скорость игры: 100%", ID_CHEAT_GAME_SPEED, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "Карта", ID_CHEAT_MAP, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "Рендер текста ТП", ID_CHEAT_TELETEXTS, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "Другая защита", ID_CHEAT_PROT, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "К свободной машине", ID_CHEAT_WARP_NEAR, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "Джетпак", ID_CHEAT_JETPACK, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "Открыть технику", ID_CHEAT_UNLOCK, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "Неотцеп прицеп", ID_CHEAT_KEEP_TRAILER, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "Включить коллизию техники", ID_CHEAT_NOCOLS, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "Чамс", ID_CHEAT_CHAMS, MENU_COLOR_DEFAULT, NULL );
+	snprintf( name, sizeof(name), "Стиль бега: %i, ", set.custom_runanimation_id );
 	menu_item_add( menu_cheats, NULL, name, ID_CHEAT_CUSTOM_RUNSTYLE, MENU_COLOR_DEFAULT, NULL );
-	snprintf( name, sizeof(name), "Player Fly Speed: %0.01f", set.fly_player_speed );
+	snprintf( name, sizeof(name), "Скорость полёта: %0.01f", set.fly_player_speed );
 	menu_item_add( menu_cheats, NULL, name, ID_CHEAT_FLY_SPEED, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Disable Water Waves", ID_CHEAT_DISABLE_WAVES, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Surf", ID_CHEAT_SURF, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Freeze vehicle spin", ID_CHEAT_FREEZEROT, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats, NULL, "Draw map lines", ID_CHEAT_MAP_DRAW_LINES, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "Убрать волны", ID_CHEAT_DISABLE_WAVES, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "Сёрф", ID_CHEAT_SURF, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "Фриз колёс техники", ID_CHEAT_FREEZEROT, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats, NULL, "Показать линни на карте", ID_CHEAT_MAP_DRAW_LINES, MENU_COLOR_DEFAULT, NULL );
 
 	/* main menu -> cheats -> invulnerable */
-	menu_item_add( menu_cheats_inv, NULL, "Actor invulnerability", ID_CHEAT_INVULN_ACTOR, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats_inv, NULL, "Vehicle invulnerability", ID_CHEAT_INVULN_VEHICLE, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats_inv, NULL, "Vehicle tire protections", ID_CHEAT_INVULN_TIRES, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats_inv, NULL, "Неуязвимость ГГ", ID_CHEAT_INVULN_ACTOR, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats_inv, NULL, "Неуязвимость техники", ID_CHEAT_INVULN_VEHICLE, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats_inv, NULL, "Неуязвимость шин", ID_CHEAT_INVULN_TIRES, MENU_COLOR_DEFAULT, NULL );
 
 	/*menu_item_add(menu_cheats_inv, NULL, "\t", ID_NONE, MENU_COLOR_SEPARATOR, NULL);*/
-	snprintf( name, sizeof(name), "Vehicle minimum HP: %d", (int)set.hp_minimum );
+	snprintf( name, sizeof(name), "Минимум ХП техники: %d", (int)set.hp_minimum );
 	menu_item_add( menu_cheats_inv, NULL, name, ID_CHEAT_INVULN_MIN_HP, MENU_COLOR_DEFAULT, NULL );
-	snprintf( name, sizeof(name), "Vehicle HP regeneration: %dhp/sec", (int)set.hp_regen );
+	snprintf( name, sizeof(name), "Реген ХП техники: %dhp/sec", (int)set.hp_regen );
 	menu_item_add( menu_cheats_inv, NULL, name, ID_CHEAT_INVULN_REGEN, MENU_COLOR_DEFAULT, NULL );
-	snprintf( name, sizeof(name), "Onfoot HP regeneration: %dhp/sec", (int)set.hp_regen );
+	snprintf( name, sizeof(name), "Реген ХП ГГ: %dhp/sec", (int)set.hp_regen );
 	menu_item_add( menu_cheats_inv, NULL, name, ID_CHEAT_INVULN_REGEN_ONFOOT, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats_inv, NULL, "Single Player Enemies vulnerable", 
+	menu_item_add( menu_cheats_inv, NULL, "Неуязвимость персонажей", 
 		ID_CHEAT_INVULN_DISABLE_EXTRA_INV, MENU_COLOR_DEFAULT, NULL );
 	// actor invulnerability additional values
-	menu_item_add(menu_cheats_inv, NULL, "Additional actor inv.:", ID_NONE, MENU_COLOR_SEPARATOR, NULL);
-	menu_item_add( menu_cheats_inv, NULL, "Explosion invulnerability", ID_CHEAT_INVULN_ACT_EXPL_INV, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats_inv, NULL, "Fall invulnerability", ID_CHEAT_INVULN_ACT_FALL_INV, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats_inv, NULL, "Fire invulnerability", ID_CHEAT_INVULN_ACT_FIRE_INV, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats_inv, NULL, "Доп. неуязвимость ГГ:", ID_NONE, MENU_COLOR_SEPARATOR, NULL);
+	menu_item_add( menu_cheats_inv, NULL, "Неуязвимость к взрывам", ID_CHEAT_INVULN_ACT_EXPL_INV, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats_inv, NULL, "Неуязвимость к падениям", ID_CHEAT_INVULN_ACT_FALL_INV, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats_inv, NULL, "Неуязвимость к огню", ID_CHEAT_INVULN_ACT_FIRE_INV, MENU_COLOR_DEFAULT, NULL );
 
 	/* main menu -> cheats -> money */
-	menu_item_add( menu_cheats_money, NULL, "Give $500", ID_CHEAT_MONEY_GIVE_500, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats_money, NULL, "Give $1000", ID_CHEAT_MONEY_GIVE_1000, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats_money, NULL, "Give $5000", ID_CHEAT_MONEY_GIVE_5000, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats_money, NULL, "Give $10000", ID_CHEAT_MONEY_GIVE_10000, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats_money, NULL, "Give $20000", ID_CHEAT_MONEY_GIVE_20000, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_cheats_money, NULL, "Give $99999999", ID_CHEAT_MONEY_GIVE_99999999, MENU_COLOR_DEFAULT, NULL );
-	snprintf( name, sizeof(name), "Give custom .ini value ($%d)", (int)set.money_value );
+	menu_item_add( menu_cheats_money, NULL, "Дать $500", ID_CHEAT_MONEY_GIVE_500, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats_money, NULL, "Дать $1000", ID_CHEAT_MONEY_GIVE_1000, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats_money, NULL, "Дать $5000", ID_CHEAT_MONEY_GIVE_5000, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats_money, NULL, "Дать $10000", ID_CHEAT_MONEY_GIVE_10000, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats_money, NULL, "Дать $20000", ID_CHEAT_MONEY_GIVE_20000, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_cheats_money, NULL, "Дать $99999999", ID_CHEAT_MONEY_GIVE_99999999, MENU_COLOR_DEFAULT, NULL );
+	snprintf( name, sizeof(name), "Дать ($%d)", (int)set.money_value );
 	menu_item_add( menu_cheats_money, NULL, name, ID_CHEAT_MONEY_GIVE_CUSTOM, MENU_COLOR_DEFAULT, NULL );
 
-	menu_item_add( menu_cheats_money, NULL, "\tSettings", ID_NONE, MENU_COLOR_SEPARATOR, NULL );
-	snprintf( name, sizeof(name), "Max money: %d", (int)set.money_amount_max );
+	menu_item_add( menu_cheats_money, NULL, "\tНастройки", ID_NONE, MENU_COLOR_SEPARATOR, NULL );
+	snprintf( name, sizeof(name), "Макс. денег: %d", (int)set.money_amount_max );
 	menu_item_add( menu_cheats_money, NULL, name, ID_CHEAT_MONEY_MAX, MENU_COLOR_DEFAULT, NULL );
-	snprintf( name, sizeof(name), "Random min: %d", (int)set.money_amount_rand_min );
+	snprintf( name, sizeof(name), "Рандом мин.: %d", (int)set.money_amount_rand_min );
 	menu_item_add( menu_cheats_money, NULL, name, ID_CHEAT_MONEY_RAND_MIN, MENU_COLOR_DEFAULT, NULL );
-	snprintf( name, sizeof(name), "Random max: %d", (int)set.money_amount_rand_max );
+	snprintf( name, sizeof(name), "Рандом макс.: %d", (int)set.money_amount_rand_max );
 	menu_item_add( menu_cheats_money, NULL, name, ID_CHEAT_MONEY_RAND_MAX, MENU_COLOR_DEFAULT, NULL );
-	snprintf( name, sizeof(name), "Interval min: %dsec", (int)set.money_interval_rand_min );
+	snprintf( name, sizeof(name), "Интервал мин.: %dsec", (int)set.money_interval_rand_min );
 	menu_item_add( menu_cheats_money, NULL, name, ID_CHEAT_MONEY_IVAL_MIN, MENU_COLOR_DEFAULT, NULL );
-	snprintf( name, sizeof(name), "Interval max: %dsec", (int)set.money_interval_rand_max );
+	snprintf( name, sizeof(name), "Интервал макс.: %dsec", (int)set.money_interval_rand_max );
 	menu_item_add( menu_cheats_money, NULL, name, ID_CHEAT_MONEY_IVAL_MAX, MENU_COLOR_DEFAULT, NULL );
 
 	/* main menu -> cheats -> weather */
@@ -3383,13 +3383,13 @@ void menu_maybe_init ( void )
 	}
 
 	/* main menu -> weapons */
-	menu_item_add( menu_weapons, NULL, "Enable weapon cheat", ID_WEAPON_ENABLE, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_weapons, NULL, "Randomize ammo values", ID_WEAPON_RANDOM, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_weapons, NULL, "Оружие чит", ID_WEAPON_ENABLE, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_weapons, NULL, "Случайное кол-во ПТ", ID_WEAPON_RANDOM, MENU_COLOR_DEFAULT, NULL );
 	for ( slot = 0; slot < 13; slot++ )
 	{
 		const struct weapon_entry	*weapon = weapon_list;
 
-		snprintf( name, sizeof(name), "\tSlot %d", slot );
+		snprintf( name, sizeof(name), "\tСлот %d", slot );
 		menu_item_add( menu_weapons, NULL, name, ID_NONE, MENU_COLOR_SEPARATOR, NULL );
 
 		while ( weapon->name != NULL )
@@ -3409,8 +3409,8 @@ void menu_maybe_init ( void )
 		menu_item_add( menu_vehicles, menu, name, ID_NONE, MENU_COLOR_DEFAULT, (void *)(UINT_PTR) i );
 	}
 
-	menu_item_add( menu_vehicles, NULL, "Freeze nearby vehicles", ID_VEHICLES_FREEZE, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_vehicles, NULL, "Warp vehicles to you", ID_VEHICLES_IWARP, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_vehicles, NULL, "Фриз близ. техники", ID_VEHICLES_FREEZE, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_vehicles, NULL, "ТП техники к вам", ID_VEHICLES_IWARP, MENU_COLOR_DEFAULT, NULL );
 
 
 	/* main menu -> patches */
@@ -3425,21 +3425,21 @@ void menu_maybe_init ( void )
 	if ( g_dwSAMP_Addr != NULL )
 	{
 		/* main menu -> players */
-		menu_item_add( menu_players, menu_players_warp, "Warp to player", ID_MENU_PLAYERS_WARP, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_players, menu_players_vehwarp, "Warp instantly to player's vehicle", ID_MENU_PLAYERS_VEHWARP, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_players, menu_players_spec, "Spectate player", ID_MENU_PLAYERS_SPEC, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_players, menu_player_info, "Show infos on player", ID_MENU_PLAYERS_INFO, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_players, menu_players_mute, "Mute player chat (Anti-spam)", ID_MENU_PLAYERS_MUTE, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_players, menu_players_warp, "ТП к игроку", ID_MENU_PLAYERS_WARP, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_players, menu_players_vehwarp, "ТП к технике с игроком", ID_MENU_PLAYERS_VEHWARP, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_players, menu_players_spec, "Слежка за игроком", ID_MENU_PLAYERS_SPEC, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_players, menu_player_info, "Информация о игроке", ID_MENU_PLAYERS_INFO, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_players, menu_players_mute, "Заглушка игрока", ID_MENU_PLAYERS_MUTE, MENU_COLOR_DEFAULT, NULL );
 
 		// net patches
-		menu_item_add( menu_samppatches, menu_netpatches_inrpc, "Disable incoming RPC", ID_MENU_NETPATCHES_INRPC, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_samppatches, menu_netpatches_outrpc, "Disable outcoming RPC", ID_MENU_NETPATCHES_OUTRPC, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_samppatches, menu_netpatches_inpacket, "Disable incoming packet", ID_MENU_NETPATCHES_INPACKET, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_samppatches, menu_netpatches_outpacket, "Disable outcoming packet", ID_MENU_NETPATCHES_OUTPACKET, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_netpatches_inrpc, NULL, "Toggle all", ID_MENU_NETPATCHES_TOGGLE_ALL, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_netpatches_outrpc, NULL, "Toggle all", ID_MENU_NETPATCHES_TOGGLE_ALL, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_netpatches_inpacket, NULL, "Toggle all", ID_MENU_NETPATCHES_TOGGLE_ALL, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_netpatches_outpacket, NULL, "Toggle all", ID_MENU_NETPATCHES_TOGGLE_ALL, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_samppatches, menu_netpatches_inrpc, "Отключить incoming RPC", ID_MENU_NETPATCHES_INRPC, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_samppatches, menu_netpatches_outrpc, "Отключить outcoming RPC", ID_MENU_NETPATCHES_OUTRPC, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_samppatches, menu_netpatches_inpacket, "Отключить incoming packet", ID_MENU_NETPATCHES_INPACKET, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_samppatches, menu_netpatches_outpacket, "Отключить outcoming packet", ID_MENU_NETPATCHES_OUTPACKET, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_netpatches_inrpc, NULL, "Включить all", ID_MENU_NETPATCHES_TOGGLE_ALL, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_netpatches_outrpc, NULL, "Включить all", ID_MENU_NETPATCHES_TOGGLE_ALL, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_netpatches_inpacket, NULL, "Включить all", ID_MENU_NETPATCHES_TOGGLE_ALL, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_netpatches_outpacket, NULL, "Включить all", ID_MENU_NETPATCHES_TOGGLE_ALL, MENU_COLOR_DEFAULT, NULL );
 
 		int netPatchNumber[4] = { 1, 1, 1, 1 };
 		for (i = 0; i < iNetPatchesCount; ++i)
@@ -3468,8 +3468,8 @@ void menu_maybe_init ( void )
 		}
 
 		// server list
-		menu_item_add( menu_servers, NULL, "Keep your current nickname", INI_SERVERS_MAX + 1, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_servers, NULL, "\tServers", ID_NONE, MENU_COLOR_SEPARATOR, NULL );
+		menu_item_add( menu_servers, NULL, "Запомнить ник", INI_SERVERS_MAX + 1, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_servers, NULL, "\tСервера", ID_NONE, MENU_COLOR_SEPARATOR, NULL );
 		for ( i = 0; i < INI_SERVERS_MAX; i++ )
 		{
 			if ( set.server[i].server_name == NULL )
@@ -3480,7 +3480,7 @@ void menu_maybe_init ( void )
 	}
 
 	/* teleports */
-	menu_item_add( menu_teleports, menu_interiors, "Teleport to interiors", STATIC_TELEPORT_MAX + 1, MENU_COLOR_DEFAULT,
+	menu_item_add( menu_teleports, menu_interiors, "Телепорт к интерьерам", STATIC_TELEPORT_MAX + 1, MENU_COLOR_DEFAULT,
 				   NULL );
 	for ( i = 0; i < 146; i++ )
 	{
@@ -3499,22 +3499,22 @@ void menu_maybe_init ( void )
 	}
 
 	/* misc */
-	menu_item_add( menu_misc, menu_debug, "Debug", ID_NONE, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_misc, NULL, "Write coordinates to log file", ID_MISC_COORDS, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_misc, NULL, "Reload settings", ID_MISC_RELOAD, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_misc, NULL, "Enable HUD text", ID_MISC_HUDTEXT, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_misc, NULL, "Disable bad weapons", ID_MISC_BAD_WEAPONS, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_misc, NULL, "Trailer support", ID_MISC_TRAILERS, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_misc, menu_hudindicators, "Toggle HUD indicators", ID_NONE, MENU_COLOR_DEFAULT, NULL );
-	snprintf( name, sizeof(name), "FPS limit: %d", set.fps_limit );
+	menu_item_add( menu_misc, menu_debug, "Дебаг", ID_NONE, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_misc, NULL, "Координаты в лог", ID_MISC_COORDS, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_misc, NULL, "Перезагрузить настройки", ID_MISC_RELOAD, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_misc, NULL, "Включить ХУД текст", ID_MISC_HUDTEXT, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_misc, NULL, "Выключить плохое оружие", ID_MISC_BAD_WEAPONS, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_misc, NULL, "Трейлер саппорт", ID_MISC_TRAILERS, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_misc, menu_hudindicators, "Включить ХУД индикаторы", ID_NONE, MENU_COLOR_DEFAULT, NULL );
+	snprintf( name, sizeof(name), "ФПС лимит: %d", set.fps_limit );
 	menu_item_add( menu_misc, NULL, name, ID_MISC_FPSLIMIT, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_misc, NULL, "Toggle windowed mode", ID_MISC_TOGGLEWINDOWED, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_misc, NULL, "Оконный режим", ID_MISC_TOGGLEWINDOWED, MENU_COLOR_DEFAULT, NULL );
 #ifdef __CHEAT_VEHRECORDING_H__
 	menu_item_add( menu_misc, menu_routes, "Routes", ID_NONE, MENU_COLOR_DEFAULT, NULL );
 #endif
 
 	/* misc -> debug */
-	menu_item_add( menu_debug, NULL, "Enable", ID_DEBUG_ENABLE, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_debug, NULL, "Включить", ID_DEBUG_ENABLE, MENU_COLOR_DEFAULT, NULL );
 	menu_item_add( menu_debug, NULL, "Self actor", ID_DEBUG_SELF_ACTOR, MENU_COLOR_DEFAULT, NULL );
 	menu_item_add( menu_debug, NULL, "Self vehicle", ID_DEBUG_SELF_VEHICLE, MENU_COLOR_DEFAULT, NULL );
 
@@ -3541,54 +3541,54 @@ void menu_maybe_init ( void )
 #endif
 
 	// misc -> HUD indicators
-	menu_item_add( menu_hudindicators, NULL, "Draw bottom bar", ID_HUDIND_BAR, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "Render text shadows", ID_HUDIND_TSHADOWS, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "Inv", ID_HUDIND_INV, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "Weapon", ID_HUDIND_WEAPON, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "Money", ID_HUDIND_MONEY, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "Freeze", ID_HUDIND_FREEZE, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "In vehicle AirBrk", ID_HUDIND_INVEH_AIRBRK, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "In vehicle Stick", ID_HUDIND_INVEH_STICK, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "In vehicle BrkDance", ID_HUDIND_INVEH_BRKDANCE, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "In vehicle SpiderWheels", ID_HUDIND_INVEH_SPIDER, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "In vehicle Fly", ID_HUDIND_INVEH_FLY, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "On foot AirBrk", ID_HUDIND_ONFOOT_AIRBRK, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "On foot Stick", ID_HUDIND_ONFOOT_STICK, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "On foot Fly", ID_HUDIND_ONFOOT_FLY, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "Aim", ID_HUDIND_ONFOOT_AIM, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "Surf", ID_HUDIND_SURF, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "FreezeRot", ID_HUDIND_FREEZEROT, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "Показать нижний хотбар", ID_HUDIND_BAR, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "Текст тень", ID_HUDIND_TSHADOWS, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "Неуязвимость", ID_HUDIND_INV, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "Оружие", ID_HUDIND_WEAPON, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "Деньги", ID_HUDIND_MONEY, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "Фриз", ID_HUDIND_FREEZE, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "АирБрейк в машине", ID_HUDIND_INVEH_AIRBRK, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "Стик в машине", ID_HUDIND_INVEH_STICK, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "БрейкДанц в машине", ID_HUDIND_INVEH_BRKDANCE, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "Паук в машине", ID_HUDIND_INVEH_SPIDER, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "Полёт в машине", ID_HUDIND_INVEH_FLY, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "АирБрейк", ID_HUDIND_ONFOOT_AIRBRK, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "Стик", ID_HUDIND_ONFOOT_STICK, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "Полёт", ID_HUDIND_ONFOOT_FLY, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "Аим", ID_HUDIND_ONFOOT_AIM, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "Сёрф", ID_HUDIND_SURF, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "ФризРот", ID_HUDIND_FREEZEROT, MENU_COLOR_DEFAULT, NULL );
 
-	menu_item_add( menu_hudindicators, NULL, "Position", ID_HUDIND_POS, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "FPS", ID_HUDIND_FPS, MENU_COLOR_DEFAULT, NULL );
-	menu_item_add( menu_hudindicators, NULL, "Toggle left bottom bars", ID_HUDIND_LB_BARS, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "Позиция", ID_HUDIND_POS, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "ФПС", ID_HUDIND_FPS, MENU_COLOR_DEFAULT, NULL );
+	menu_item_add( menu_hudindicators, NULL, "Показать левый нижний хотбар", ID_HUDIND_LB_BARS, MENU_COLOR_DEFAULT, NULL );
 
 	if ( g_dwSAMP_Addr != NULL )
 	{
 		// main menu -> sampmisc
-		menu_item_add( menu_sampmisc, menu_vehicles_instant, "Warp instantly to vehicle", ID_NONE, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_sampmisc, menu_fake_kill, "Fake kill", ID_NONE, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_sampmisc, menu_spoof_weapon, "Spoof weapon", ID_NONE, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_sampmisc, NULL, "Player info list", ID_MENU_SAMPMISC_SAMP_INFO_LIST, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_sampmisc, NULL, "Replace chat text rendering", ID_MENU_SAMPMISC_CHAT_TEXT, MENU_COLOR_DEFAULT, NULL );
-		snprintf( name, sizeof(name), "Display chat lines: %d", set.d3dtext_chat_lines );
+		menu_item_add( menu_sampmisc, menu_vehicles_instant, "ТП машины", ID_NONE, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_sampmisc, menu_fake_kill, "Фейк килл", ID_NONE, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_sampmisc, menu_spoof_weapon, "Фейк оружие", ID_NONE, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_sampmisc, NULL, "Информация о игроках", ID_MENU_SAMPMISC_SAMP_INFO_LIST, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_sampmisc, NULL, "Изменить визуализацию текста", ID_MENU_SAMPMISC_CHAT_TEXT, MENU_COLOR_DEFAULT, NULL );
+		snprintf( name, sizeof(name), "Линий в чате: %d", set.d3dtext_chat_lines );
 		menu_item_add( menu_sampmisc, NULL, name, ID_MENU_SAMPMISC_CHAT_TEXTLINES, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_sampmisc, menu_gamestate, "Change game state", ID_NONE, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_sampmisc, menu_specialaction, "Special action", ID_NONE, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_sampmisc, NULL, "Drunk", ID_MENU_SAMPMISC_SAMP_DRUNK, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_sampmisc, menu_teleobject, "Teleport to object", ID_MENU_SAMPMISC_TELEOBJECT, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_sampmisc, NULL, "Render object texts", ID_MENU_SAMPMISC_RENDEROBJTXT, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_sampmisc, menu_telepickup, "Teleport to pickup", ID_MENU_SAMPMISC_TELEPICKUP, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_sampmisc, NULL, "Render pickup texts", ID_MENU_SAMPMISC_RENDERPCKTXT, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_sampmisc, NULL, "Load M0D-Commands", ID_MENU_SAMPMISC_M0DCOMMANDS, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_sampmisc, NULL, "Extra godmode", ID_MENU_SAMPMISC_EXTRAGM, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_sampmisc, menu_gamestate, "Изменить статус", ID_NONE, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_sampmisc, menu_specialaction, "Анимации", ID_NONE, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_sampmisc, NULL, "Пьяный", ID_MENU_SAMPMISC_SAMP_DRUNK, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_sampmisc, menu_teleobject, "Телепорт к объектам", ID_MENU_SAMPMISC_TELEOBJECT, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_sampmisc, NULL, "Показать текст объектов", ID_MENU_SAMPMISC_RENDEROBJTXT, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_sampmisc, menu_telepickup, "Телепорт к пикапам", ID_MENU_SAMPMISC_TELEPICKUP, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_sampmisc, NULL, "Показать текст пикапов", ID_MENU_SAMPMISC_RENDERPCKTXT, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_sampmisc, NULL, "Загрузить команды собейта", ID_MENU_SAMPMISC_M0DCOMMANDS, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_sampmisc, NULL, "ЭКСТРА ГМ", ID_MENU_SAMPMISC_EXTRAGM, MENU_COLOR_DEFAULT, NULL );
 
 		/* main menu -> sampmisc -> change game state */
-		menu_item_add( menu_gamestate, NULL, "Connecting", GAMESTATE_CONNECTING, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_gamestate, NULL, "Connected", GAMESTATE_CONNECTED, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_gamestate, NULL, "Await join", GAMESTATE_AWAIT_JOIN, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_gamestate, NULL, "Game mode restarting", GAMESTATE_RESTARTING, MENU_COLOR_DEFAULT, NULL );
-		menu_item_add( menu_gamestate, NULL, "Wait connect", GAMESTATE_WAIT_CONNECT, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_gamestate, NULL, "Подключение", GAMESTATE_CONNECTING, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_gamestate, NULL, "Подключён", GAMESTATE_CONNECTED, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_gamestate, NULL, "Ожидает присоединения", GAMESTATE_AWAIT_JOIN, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_gamestate, NULL, "Рестарт", GAMESTATE_RESTARTING, MENU_COLOR_DEFAULT, NULL );
+		menu_item_add( menu_gamestate, NULL, "Ожидает подключенияя", GAMESTATE_WAIT_CONNECT, MENU_COLOR_DEFAULT, NULL );
 
 		/* main menu -> sampmisc -> special action */
 		menu_item_add( menu_specialaction, NULL, "None", ID_MENU_SPECIAL_ACTION_NONE, MENU_COLOR_DEFAULT, NULL );
@@ -3613,20 +3613,20 @@ void menu_maybe_init ( void )
 		{
 			const struct weapon_entry	*weapon = &weapon_list[i];
 
-			if ( strcmp(weapon->name, "Camera") == 0
-			 ||	 strcmp(weapon->name, "NV Goggles") == 0
-			 ||	 strcmp(weapon->name, "IR Goggles") == 0
-			 ||	 strcmp(weapon->name, "Parachute") == 0
-			 ||	 strcmp(weapon->name, "Detonator") == 0 ) continue;
+			if ( strcmp(weapon->name, "Камера") == 0
+			 ||	 strcmp(weapon->name, "NV Очки") == 0
+			 ||	 strcmp(weapon->name, "IR Очки") == 0
+			 ||	 strcmp(weapon->name, "Парашут") == 0
+			 ||	 strcmp(weapon->name, "Детонатор") == 0 ) continue;
 
-			snprintf( name, sizeof(name), "Fake killed by %s", weapon->name );
+			snprintf( name, sizeof(name), "Фейк килл с %s", weapon->name );
 			menu_item_add( menu_spoof_weapon, NULL, name, ID_MENU_SAMPMISC_SPOOF_WEAPON, MENU_COLOR_DEFAULT,
 						   (void *)(UINT_PTR) weapon->id );
 		}
 
-		menu_item_add( menu_spoof_weapon, NULL, "Fake death by fall", ID_MENU_SAMPMISC_SPOOF_WEAPON, MENU_COLOR_DEFAULT,
+		menu_item_add( menu_spoof_weapon, NULL, "Фейк убийство падением", ID_MENU_SAMPMISC_SPOOF_WEAPON, MENU_COLOR_DEFAULT,
 					   (void *)(UINT_PTR) 20 );
-		menu_item_add( menu_spoof_weapon, NULL, "Fake begin run over", ID_MENU_SAMPMISC_SPOOF_WEAPON, MENU_COLOR_DEFAULT,
+		menu_item_add( menu_spoof_weapon, NULL, "Фейк бег", ID_MENU_SAMPMISC_SPOOF_WEAPON, MENU_COLOR_DEFAULT,
 					   (void *)(UINT_PTR) 21 );
 	}
 
